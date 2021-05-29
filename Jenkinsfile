@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        MY_CRED = credentials('ID')
+    }
     stages {
         stage ('git checkout') {
             steps {
@@ -13,7 +16,7 @@ pipeline {
                 sh 'mvn clean'
             }
         }
-        stage ('test') {
+        stage ('Test') {
             steps {
                 echo 'start testing stage'
                 sh 'mvn test'
@@ -31,7 +34,13 @@ pipeline {
         }
         stage ('deply') {
             steps {
-                sh 'docker run -d --name dev -p 9090:8080 spring-petclinic:${BUILD_NUMBER} '
+                sh 'docker run -d --name dev -p 9090:8080 docker  mohamedmohsen20/spring-petclinic:${BUILD_NUMBER} '
+            }
+        }
+        stage ('docker hub') {
+            steps {
+                sh 'docker login --username  $MY_CRED_USR --password $MY_CRED_PSW '
+                sh 'docker push mohamedmohsen20/spring-petclinic:${BUILD_NUMBER} '
             }
         }
     }
