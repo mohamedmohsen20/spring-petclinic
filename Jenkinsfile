@@ -29,12 +29,12 @@ pipeline {
         }
         stage ('build image') {
             steps {
-                sh 'docker build -t mohamedmohsen20/spring-petclinic:${BUILD_NUMBER} .'
+                sh 'docker build -t spring-petclinic:${BUILD_NUMBER} .'
             }
         }
         stage ('deply') {
             steps {
-                sh 'docker run -d --name dev -p 9090:8080 docker  mohamedmohsen20/spring-petclinic:${BUILD_NUMBER} '
+                sh 'docker run -d --name dev -p 9090:8080 spring-petclinic:${BUILD_NUMBER} '
             }
         }
         stage ('docker hub') {
