@@ -29,7 +29,7 @@ pipeline {
         }
         stage ('build image') {
             steps {
-                sh 'docker build -t spring-petclinic:${BUILD_NUMBER} .'
+                sh 'docker build -t mohamedmohsen20/spring-petclinic:${BUILD_NUMBER} .'
             }
         }
         stage ('deply') {
@@ -40,7 +40,7 @@ pipeline {
         stage ('docker hub') {
             steps {
                 sh 'docker login --username  $MY_CRED_USR --password $MY_CRED_PSW '
-                sh 'docker push mohamedmohsen/spring-petclinic:${BUILD_NUMBER} '
+                sh 'docker push mohamedmohsen20/spring-petclinic:${BUILD_NUMBER} '
             }
         }
     }
