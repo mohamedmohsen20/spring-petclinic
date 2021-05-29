@@ -4,7 +4,7 @@ pipeline {
         stage ('git checkout') {
             steps {
                 echo 'start git checkout stage'
-                git 'https://github.com/mohamedmohsen20/spring-petclinic.git'
+                git branch: 'main', url: 'https://github.com/mohamedmohsen20/spring-petclinic.git'
             }
         }
         stage ('build') {
