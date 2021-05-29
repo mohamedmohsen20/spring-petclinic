@@ -40,7 +40,7 @@ pipeline {
         stage ('docker hub') {
             steps {
                 sh 'docker login --username  $MY_CRED_USR --password $MY_CRED_PSW '
-                sh 'docker push mohamedmohsen20/spring-petclinic:${BUILD_NUMBER} '
+                sh 'docker push spring-petclinic:${BUILD_NUMBER} '
             }
         }
     }
